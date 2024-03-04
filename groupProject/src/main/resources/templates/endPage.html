@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Details</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<h1>Purchase details:</h1>
+<h2>Name: <span th:text="${buyer.firstName} + ' ' + ${buyer.lastName}"></span></h2>
+<h2>Email: <span th:text="${buyer.email}"></span></h2>
+<h2>Payment method: <span th:text="${param.payment}"></span></h2>
+
+</body>
+</html>

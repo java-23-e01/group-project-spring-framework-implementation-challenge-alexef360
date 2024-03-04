@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Form</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<form th:action="@{/payment}" method="GET">
+    <h1>Enter your details:</h1>
+    <input type="text" name="firstName" placeholder="Enter your name" class="input-field">
+    <input type="text" name="lastName" placeholder="Enter your last name" class="input-field">
+    <input type="email" name="email" placeholder="Enter your e-mail address" class="input-field">
+    <h3>Confirm the purchase</h3>
+    <button class="confirm-button" type="submit">Confirm</button>
+</form>
+</body>
+</html>

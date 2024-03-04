@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Payment Method</title>
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+<h1>Payment Method</h1>
+<form id="paymentForm" action="/process_payment" th:action="@{/endPage}" method="GET">
+    <div class="form-group">
+        <input type="radio" id="paypal" name="payment_method" value="PayPal">
+        <label for="paypal">PayPal</label>
+    </div>
+    <div class="form-group">
+        <input type="radio" id="card" name="payment_method" value="Card">
+        <label for="card">Card</label>
+    </div>
+    <div id="cardDetails" style="display: none;">
+        <div class="form-group">
+            <label for="cardNumber">Card Number:</label>
+            <input type="text" id="cardNumber" name="cardNumber">
+        </div>
+        <div class="form-group">
+            <label for="expiryDate">Expiry Date:</label>
+            <input type="text" id="expiryDate" name="expiryDate">
+        </div>
+        <div class="form-group">
+            <label for="cvv">CVV:</label>
+            <input type="text" id="cvv" name="cvv">
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="radio" id="cash" name="payment_method" value="Cash">
+        <label for="cash">Cash</label>
+    </div>
+    <div class="form-group">
+        <button class="confirm-button" type="submit">Confirm</button>
+    </div>
+
+</form>
+<script>
+    document.getElementById("paymentForm").addEventListener("submit", function(event) {
+        var paymentMethod = document.querySelector('input[name="payment_method"]:checked');
+        if (!paymentMethod) {
+            alert("Please select a payment method.");
+            event.preventDefault(); // Prevent form submission if no payment method is selected
+        }
+        else if (paymentMethod.value === "PayPal") {
+            window.location.href = "https://www.paypal.com"; // Redirect to PayPal page
+            event.preventDefault(); // Prevent default form submission
+        }
+        else if (paymentMethod.value === "Card") {
+            var cardNumber = document.getElementById("cardNumber").value;
+            var expiryDate = document.getElementById("expiryDate").value;
+            var cvv = document.getElementById("cvv").value;
+            if (!cardNumber || !expiryDate || !cvv) {
+                alert("Please fill in all card details.");
+                event.preventDefault(); // Prevent form submission if card details are incomplete
+            }
+        }
+        // Add handling for other payment methods here if needed
+    });
+
+    // Show card details fields when "Card" is selected
+    document.getElementById("card").addEventListener("change", function() {
+        var cardDetails = document.getElementById("cardDetails");
+        if (this.checked) {
+            cardDetails.style.display = "block";
+        } else {
+            cardDetails.style.display = "none";
+        }
+    });
+</script>
+</body>
+</html>
